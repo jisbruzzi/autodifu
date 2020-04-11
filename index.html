@@ -1,0 +1,88 @@
+<head>
+    <title>Generador de flyers</title>
+</head>
+
+<body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.16/svg.js"></script>
+
+    <div>
+        original
+        <object id="imagen" data="whatsapp.svg" type="image/svg+xml"></object>
+    </div>
+    <br>
+    <div>
+        nuevo:
+        <div id="nuevaimagen"></div>
+    </div>
+    <br>
+    <div>
+        <textarea id="titulo" onkeyup="modificar()"></textarea>
+    </div>
+
+    <script>
+
+        function hacerConEnfasisLinea(container,linea){
+            let primero=null
+            linea.split("*").forEach((parte,indice,todos)=>{
+                if(parte.length==0){
+                    return
+                }
+                let span = container.tspan(parte)
+                if(indice == 0 || (indice==1 && todos[0]=="")){
+                    primero = span
+                }
+                if(indice % 2==0){
+                    span.fill("black")
+                }else{
+                    span.fill("#dd760dff")
+                }
+                return span
+            })
+            return primero
+        }
+
+        function hacerConEnfasis(container,texto){
+            texto.split("\n").forEach((linea,indice)=>{
+                let ultimoTspan=hacerConEnfasisLinea(container,linea)
+                if(indice>0){
+                    ultimoTspan.dy("0.9em").x(container.x())
+                }
+            })
+        }
+
+        function modificar() {
+            let titulo = document.getElementById("titulo").value
+            /*
+            let elem=svgDoc.getElementById("tspan842-6")
+            elem.textContent=titulo.replace("\\n","\n")
+
+            let texto = new SVG(svgDoc).find("#text828-0")[0];
+            texto.clear()
+            */
+            let texto = elemSvg.find("#text828")
+            texto.attr("style","")
+            texto.font({family:"Arial",weight:"bold",size:"8.42772865px"})
+
+            texto.text(function (container){
+                /*
+                asd.tspan("CON ").fill("green")
+                asd.tspan("ASD ").fill("violet")
+                asd.tspan("QUE?").fill("orange").dy("0.9em").x(asd.x())
+                asd.tspan("AHREEEE").fill("violet").dy("0.9em").x(asd.x())
+                */
+                hacerConEnfasis(container,titulo)
+            })
+            
+            
+        }
+        let elemSvg;
+        document.getElementById("imagen").addEventListener("load", function () {
+            let elementoSvg=document.getElementById("imagen").contentDocument.documentElement
+            let stringSvg = new XMLSerializer().serializeToString(elementoSvg)
+            elemSvg=new SVG(stringSvg).addTo("#nuevaimagen")
+            modificar()
+        }, false);
+
+    </script>
+</body>
