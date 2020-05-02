@@ -1,0 +1,5 @@
+.hor {
+    display: flex;
+    flex-direction: row;
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
