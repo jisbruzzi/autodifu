@@ -9,7 +9,7 @@ function arreglarTexto(texto,estilo,anchoMaximo){
             let lineas = [""]
 
             for(let palabra of texto.split(" ")){
-                if(ancho(lineas+palabra)>anchoMaximo){
+                if(ancho(lineas[lineas.length-1]+palabra)>anchoMaximo){
                     lineas.push("")
                 }
                 if(lineas[lineas.length-1]==""){
