@@ -71,6 +71,14 @@ function deformarAltoMaximo(elemento,altoMaximo){
     }
 }
 
+function deformarAnchoMinimo(elemento,acnhoMinimo){
+    if(elemento.width<acnhoMinimo){
+        elemento.height*=acnhoMinimo/elemento.width
+        elemento.width=acnhoMinimo
+    }
+}
+
+
 function armarStage(stage, nombreDelSanto,  tituloDelSanto, fecha, descripcion, imagenSanto){
 
     //nubes
@@ -81,6 +89,7 @@ function armarStage(stage, nombreDelSanto,  tituloDelSanto, fecha, descripcion, 
     if(imagenSanto!=null){
         let elementoImagenSanto=PIXI.Sprite.from(PIXI.Texture.from(imagenSanto))
 
+        deformarAnchoMinimo(elementoImagenSanto,1080*3/4)
         deformarAltoMaximo(elementoImagenSanto,1080*11/16)
 
         elementoImagenSanto.x=1080-elementoImagenSanto.width
