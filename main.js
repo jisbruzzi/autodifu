@@ -79,10 +79,22 @@ function deformarAnchoMinimo(elemento,acnhoMinimo){
 }
 
 
-function armarStage(stage, nombreDelSanto,  tituloDelSanto, fecha, descripcion, imagenSanto){
+function armarStage(stage, nombreDelSanto,  tituloDelSanto, fecha, descripcion, imagenSanto, colorfondo){
 
+    //color de fondo
+    let colorFondo=new PIXI.Graphics();
+    colorFondo.beginFill(parseInt(colorfondo))
+    colorFondo.moveTo(0,0)
+    colorFondo.lineTo(0,1080)
+    colorFondo.lineTo(1080,1080)
+    colorFondo.lineTo(1080,0)
+    colorFondo.lineTo(0,0)
+    colorFondo.endFill()
+    stage.addChild(colorFondo)
     //nubes
-    let fondo = PIXI.Sprite.from("./fondo.png")
+    let fondo = PIXI.Sprite.from("./nubes.png")
+    //fondo.blendMode = PIXI.BLEND_MODES.LIGHTEN;
+    fondo.alpha=0.05
     stage.addChild(fondo)
 
     //imagen santo
@@ -213,14 +225,15 @@ Porque Dios los ayuda a todos, aunque no madruguen.
 
 Al que peca, Dios lo educa. Y si UD. no madruga porque peca, Dios lo está educando.
     `
-    armarStage(app.stage,"San José","Obrero","2020-04-05",descripcion)
+    armarStage(app.stage,"San José","Obrero","2020-04-05",descripcion,"0x1D2A3A")
 
     let idControles=[
         "nombre",
         "titulo",
         "fecha",
         "descripcion",
-        "imagenSanto"
+        "imagenSanto",
+        "color_fondo"
     ]
     function eventoCambio(){
         let valores={}
@@ -235,7 +248,7 @@ Al que peca, Dios lo educa. Y si UD. no madruga porque peca, Dios lo está educa
                 app.stage.removeChild(child)
             }
 
-            armarStage(app.stage,valores["nombre"],valores["titulo"],valores["fecha"],valores["descripcion"],imagenSanto)
+            armarStage(app.stage,valores["nombre"],valores["titulo"],valores["fecha"],valores["descripcion"],imagenSanto,valores["color_fondo"])
 
         })
 
