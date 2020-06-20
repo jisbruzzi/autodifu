@@ -79,22 +79,10 @@ function deformarAnchoMinimo(elemento,acnhoMinimo){
 }
 
 
-function armarStage(stage, nombreDelSanto,  tituloDelSanto, fecha, descripcion, imagenSanto, colorfondo){
+function armarStage(stage, nombreDelSanto,  tituloDelSanto, fecha, descripcion, imagenSanto, nombreFondo){
 
-    //color de fondo
-    let colorFondo=new PIXI.Graphics();
-    colorFondo.beginFill(parseInt(colorfondo))
-    colorFondo.moveTo(0,0)
-    colorFondo.lineTo(0,1080)
-    colorFondo.lineTo(1080,1080)
-    colorFondo.lineTo(1080,0)
-    colorFondo.lineTo(0,0)
-    colorFondo.endFill()
-    stage.addChild(colorFondo)
     //nubes
-    let fondo = PIXI.Sprite.from("./nubes.png")
-    //fondo.blendMode = PIXI.BLEND_MODES.LIGHTEN;
-    fondo.alpha=0.05
+    let fondo = PIXI.Sprite.from("./"+nombreFondo)
     stage.addChild(fondo)
 
     //imagen santo
@@ -218,6 +206,8 @@ function main (){
     //Add the canvas that Pixi automatically created for you to the HTML document
     
     document.getElementById("pixiContainer").appendChild(app.view);
+    let style = document.getElementsByTagName("canvas").item(0).style;
+    style.width="100%"
 
     let descripcion=`El que madruga, Dios lo ayuda.
 Al que no madruga, Dios también lo ayuda.
@@ -225,7 +215,7 @@ Porque Dios los ayuda a todos, aunque no madruguen.
 
 Al que peca, Dios lo educa. Y si UD. no madruga porque peca, Dios lo está educando.
     `
-    armarStage(app.stage,"San José","Obrero","2020-04-05",descripcion,"0x1D2A3A")
+    armarStage(app.stage,"San José","Obrero","2020-04-05",descripcion,"fondo_santo.jpg")
 
     let idControles=[
         "nombre",

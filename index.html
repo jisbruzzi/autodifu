@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -10,26 +11,63 @@
     <script src='main.js'></script>
     <script src="https://pixijs.download/v5.2.3/pixi.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="hor">
-        <div id="pixiContainer"></div>
-        <div id="controlContainer">
-            <br>Nombre:
-            <br><textarea id="nombre"></textarea>
-            <br>Título del santo
-            <br><textarea id="titulo"></textarea>
-            <br>Fecha del santo
-            <br><input type="date" id="fecha">
-            <br>Descripción
-            <br><textarea id="descripcion"></textarea>
-            <br><input type="file" id="imagenSanto">
-            <br>Color
-            <br><select id="color_fondo">
-                <option value="0x626262">gris santos</option>
-                <option value="0x1d2a3a">azul</option>
-                <option value="0x8d4b4d">rojo fiestas</option>
-            </select>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1 class="display">Autodifu: el generador de flyers</h1>
+                <p>Vengan a mí todos los que están afligidos y agobiados, y yo los aliviaré. Carguen sobre ustedes mi yugo y aprendan de mí, porque soy paciente y humilde de corazón, y así encontrarán alivio. Porque mi yugo es suave y mi carga liviana.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <div id="pixiContainer"></div>
+            </div>
+            <div class="col-md">
+                <div id="controlContainer">
+                    <div class="form-group">
+                        <label for="color_fondo">Tipo de flyer</label>
+                        <select id="color_fondo" class="form-control">
+                            <option value="fondo_santo.jpg" selected>Santo</option>
+                            <option value="fondo_jesus_maria.jpg">Jesús o María</option>
+                            <option value="fondo_especial.jpg">Fecha especial</option>
+                        </select>
+                        <small class="form-text text-muted"> Santo: memoria de santos. Jesús o María: memoria relacionada a Jesús o María. Fecha especial: fechas especiales como Navidad, Pentecostés, Pascua, etc.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" />
+                        <small class="form-text text-muted">Nombre o inicio del nombre. Debe ser lo más descriptivo posible manteniendolo corto para que no se achique el texto. Debe expesar el nombre del santo. Puede continuar en "título del santo". Ejemplos: "San José", "San Agustín", "Santa Teresita", "Sagrado Corazón".</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="titulo">Título del santo</label>
+                        <input type="text" class="form-control" id="titulo" />
+                        <small class="form-text text-muted">Continuación del nombre unívoco del santo. Aquí no es necesario ser tan estricto con la cantidad de palabras, puede continuar el Nombre. Este campo es opcional pero recomendado. No lo uses si queda forzado. Ejemplos: "Obrero", "de Hipona", "de Lisieux", "de Jesús".</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha en que se conmemora</label>
+                        <input type="date" class="form-control" id="fecha" min="2020-01-01" max="2020-12-31"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea id="descripcion" class="form-control"></textarea>
+                        <small class="form-text text-muted">Explayate pero no te explayes. Esto es un flyer. Intentá terminar los renglones de forma que quede bien con la imagen.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagenSanto">Imagen</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input custom-file" id="imagenSanto">
+                            <label class="custom-file-label" for="imagenSanto">Elegir imagen</label>
+                        </div>
+                        <small class="form-text text-muted">Imagen del santo con el fondo recortado. Se coloca siempre en la esquina inferior derecha y se fuerzan ciertas proporciones. Confiá en las proporciones del generador.</small>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
