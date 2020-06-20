@@ -202,11 +202,14 @@ function cargarImagen(id){
 
 
 function main (){
-    let app = new PIXI.Application({width: 1080, height: 1080});
+    let app = new PIXI.Application({width: 1080, height: 1080, forceCanvas:true, preserveDrawingBuffer:true});
+    function canvas(){
+        return document.getElementsByTagName("canvas").item(0);
+    }
     //Add the canvas that Pixi automatically created for you to the HTML document
     
     document.getElementById("pixiContainer").appendChild(app.view);
-    let style = document.getElementsByTagName("canvas").item(0).style;
+    let style = canvas().style;
     style.width="100%"
 
     let descripcion=`El que madruga, Dios lo ayuda.
@@ -237,8 +240,8 @@ Al que peca, Dios lo educa. Y si UD. no madruga porque peca, Dios lo está educa
             for(let child of app.stage.children){
                 app.stage.removeChild(child)
             }
-
             armarStage(app.stage,valores["nombre"],valores["titulo"],valores["fecha"],valores["descripcion"],imagenSanto,valores["color_fondo"])
+            document.getElementById("descargar").href=canvas().toDataURL()
 
         })
 
